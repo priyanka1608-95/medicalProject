@@ -6,11 +6,19 @@ import com.medicalProject.Service.MedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MedicineServiceImpl implements MedicineService {
 
     @Autowired
     MedicineRepository medicineRepository;
+
+    @Override
+    public List<Medicine> getAllMeds() {
+        List<Medicine> medicineList=medicineRepository.findAll();
+        return medicineList;
+    }
 
     @Override
     public Medicine addMedicine(Medicine medicine) {

@@ -1,6 +1,8 @@
 package com.medicalProject.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 
@@ -39,7 +41,10 @@ public class Medicine {
 
     private int remainingQty;
 
+    private int purchasedQty;
+
     @ManyToMany(mappedBy = "medicines")
+    @JsonBackReference
     private List<Customer> customers;
 
 }

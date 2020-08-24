@@ -1,6 +1,8 @@
 package com.medicalProject.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -30,11 +32,12 @@ public class Customer {
 
     private float amtRemaining;
 
+
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Temporal(value=TemporalType.DATE)
     private Date purchaseDate;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "cust_meds",
             joinColumns = @JoinColumn(name = "custId"),
             inverseJoinColumns=@JoinColumn(name = "medId")

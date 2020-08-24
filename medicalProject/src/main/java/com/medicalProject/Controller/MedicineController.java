@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/medicines")
 public class MedicineController {
@@ -50,6 +52,19 @@ public class MedicineController {
 
     }
 
+    @GetMapping("/getAllMeds")
+    public ResponseEntity<?> getAllMeds()
+    {
+        List<Medicine> medicineList = medicineService.getAllMeds();
+        if(medicineList !=null)
+            return new ResponseEntity<>(medicineList,HttpStatus.OK);
+        else {
+            ResponseModel responseModel = new ResponseModel();
+            responseModel.setMessage("Medicine List is Empty");
+            responseModel.setStatus("FAILED");
+            return new ResponseEntity<>(responseModel, HttpStatus.BAD_REQUEST);
+        }
+    }
 
 
 
